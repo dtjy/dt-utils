@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dt.utils.mapper.DoubleColorBallMapper" >
+  <resultMap id="BaseResultMap" type="com.dt.utils.model.DoubleColorBall" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <result column="op_id" property="opId" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="op_day" property="opDay" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <insert id="insertAllHistoryData">
+    insert into double_color_ball (op_id,number,op_day)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (
+      #{item.opId},
+      #{item.number},
+      #{item.opDay}
+      )
+    </foreach>
+  </insert>
+
+  <select id="sss" resultType="string">
+    select op_id  from double_color_ball limit 1
+  </select>
+</mapper>
