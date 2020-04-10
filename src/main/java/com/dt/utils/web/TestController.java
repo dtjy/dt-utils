@@ -54,7 +54,7 @@ public class TestController {
     @ResponseBody
     public String testString3 (String key,String value){
         if (redisUtil.set(key,value+"_"+key)){
-            return "成功";
+            return redisUtil.get(key).toString();
         }else {
             return "失败";
         }
