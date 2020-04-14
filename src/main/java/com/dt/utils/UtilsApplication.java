@@ -6,6 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.kafka.annotation.EnableKafka;
+
 /**
  * @Author jiangyao
  * @Date 2019/6/27 9:35
@@ -13,6 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.dt.utils"})
 @EnableCaching //开启注解
+@EnableKafka
 public class UtilsApplication {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(UtilsApplication.class);
