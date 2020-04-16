@@ -21,6 +21,8 @@ public class KafkaLogsConsumer {
 
     private static Logger LOGGER = LoggerFactory.getLogger(KafkaLogsConsumer.class);
 
+    public static final String CONSUMER_ENABLE_AUTO_COMMIT = "false";       //是否自动提交（消费者）
+
     private static final String TOPIC_PREFIX = "LOG_TOPIC";
     private static final String TEST_TOPIC = "TEST_TOPIC";
     private static final String TOPIC_DATE_PATTERN = "yyyy-MM-dd";
@@ -31,15 +33,26 @@ public class KafkaLogsConsumer {
     @KafkaListener(topics = TOPIC_PREFIX)
     public void listenMsg (ConsumerRecord<?,String> record) {
         String value = record.value();
-        LOGGER.info("ConsumerMsg====>>"+value);
+        LOGGER.info(">>>>>>>>>>>>>>>>>>"+value);
         String format = DateFormatUtils.format(new Date(), TOPIC_DATE_PATTERN);
         redisUtil.lSet(KafkaLogsConsumer.TOPIC_PREFIX+"_"+format,value);
     }
 
     @KafkaListener(topics = TEST_TOPIC)
     public void testMsg (ConsumerRecord<?,String> record) {
-        String value = record.value();
-        LOGGER.info("ConsumerMsg====>>"+value);
+        LOGGER.info(">>>>>>>>>>>>>>>>>>{}-{}-{}",record.value(),record.partition(),record.offset());
     }
+
+//    @KafkaListener(topics = TEST_TOPIC)
+//    public void testMsgOfferset (ConsumerRecord<?,String> record) {
+//        String value = record.value();
+//        LOGGER.info(">>>>>>>>>>>>>>>>>>"+value);
+//    }
+
+//    @KafkaListener(topics = TEST_TOPIC)
+//    public void testMsgOfferset (ConsumerRecord<?,String> record) {
+//        String value = record.value();
+//        LOGGER.info(">>>>>>>>>>>>>>>>>>"+value);
+//    }
 
 }

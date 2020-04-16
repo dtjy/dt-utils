@@ -60,4 +60,12 @@ public class TestController {
         }
     }
 
+
+    //指定offset进行消费
+    @RequestMapping("k")
+    @ResponseBody
+    public String testString (String msg){
+        return "success";
+    }
+
 }
